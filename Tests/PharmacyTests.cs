@@ -2,12 +2,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PharmaciesService.Controllers;
 using PharmaciesService.Models;
-using System;
-using System.Collections.Generic;
 
 namespace PharmaciesService.Tests
 {
-    [TestClass]
+  [TestClass]
     public class PharmaciesControllerTests
     {
         [TestMethod]
@@ -18,13 +16,13 @@ namespace PharmaciesService.Tests
 
             // Act
             ActionResult<List<Pharmacy>> result = controller.GetLocationsByTimeSpan(
-                new DateTime(2023, 1, 1, 10, 0, 0),  // Start time: 10:00
-                new DateTime(2023, 1, 1, 13, 0, 0)  // End time: 13:00
+                "10:00",
+                "13:00"
             );
 
             // Assert
             Assert.IsInstanceOfType(result.Result, typeof(OkObjectResult));
-            var okResult = (OkObjectResult)result.Result;
+            var okResult = result.Result as OkObjectResult;
             Assert.IsInstanceOfType(okResult.Value, typeof(List<Pharmacy>));
             var pharmacies = (List<Pharmacy>)okResult.Value;
             Assert.AreEqual(2, pharmacies.Count);
@@ -39,13 +37,13 @@ namespace PharmaciesService.Tests
 
             // Act
             ActionResult<List<Pharmacy>> result = controller.GetLocationsByTimeSpan(
-                new DateTime(2023, 1, 1, 1, 0, 0),   // Start time: 01:00
-                new DateTime(2023, 1, 1, 4, 0, 0)   // End time: 04:00
+                "01:00",
+                "04:00"
             );
 
             // Assert
             Assert.IsInstanceOfType(result.Result, typeof(NotFoundObjectResult));
-            var notFoundResult = (NotFoundObjectResult)result.Result;
+            var notFoundResult = result.Result as NotFoundObjectResult;
             Assert.AreEqual("No pharmacies are open during the specified time span.", notFoundResult.Value);
         }
     }
