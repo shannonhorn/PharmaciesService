@@ -1,14 +1,11 @@
 using Microsoft.AspNetCore.Mvc;
 using PharmaciesService.Models;
 using PharmaciesService.Data;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace PharmaciesService.Controllers
 {
-    [ApiController]
-    [Route("[pharmacies]")]
+  [ApiController]
+    [Route("pharmacies")]
     public class PharmaciesController : ControllerBase
     {
       [HttpGet("getLocationsByTimeSpan")]

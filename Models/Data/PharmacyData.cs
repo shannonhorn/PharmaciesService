@@ -1,12 +1,10 @@
 using CsvHelper;
 using PharmaciesService.Models;
-using System.Collections.Generic;
 using System.Globalization;
-using System.IO;
 
 namespace PharmaciesService.Data
 {
-    public static class PharmacyData
+  public static class PharmacyData
     {
         public static List<Pharmacy> LoadPharmacies()
         {
